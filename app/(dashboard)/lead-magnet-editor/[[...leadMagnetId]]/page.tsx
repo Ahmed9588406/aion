@@ -21,13 +21,19 @@ async function LeadMagnetEditorPage({ params }: LeadMagnetEditorParams) {
 
   let leadMagnet: LeadMagnet | null = null;
   if (!leadMagnetId) {
-    // Create a new LeadMagnet with a new ID and default values
+    // Create a new LeadMagnet
     leadMagnet = await createNewLeadMagnet();
   } else {
-    leadMagnet = await prismadb.leadMagnet.findUnique({
+    // Fetch existing LeadMagnet
+    let leadMagnet = await prismadb.leadMagnet.findUnique({
       where: {
         id: leadMagnetId,
       },
+      select: {
+        id: true,
+        updatedAt: true,
+        // Other fields you need for editing
+      }, // Only select necessary fields for performance
     });
   }
 
@@ -41,24 +47,23 @@ async function LeadMagnetEditorPage({ params }: LeadMagnetEditorParams) {
 export default LeadMagnetEditorPage;
 
 async function createNewLeadMagnet() {
-  const newSlug = generateUniqueSlug(); // Function to generate a new unique slug
+  const newSlug = generateUniqueSlug();
 
-  // Create a new LeadMagnet with a new ID, default values, and the new slug
+  // Create a new LeadMagnet with default values and new slug
   return await prismadb.leadMagnet.create({
     data: {
       ...DEFAULT_LEAD_MAGNET,
       id: generateUniqueId(),
       slug: newSlug,
+      updatedAt: new Date(), // Include initial updatedAt value
     },
   });
 }
 
-// Function to generate a unique ID using uuid
 function generateUniqueId(): string {
   return uuidv4();
 }
 
-// Function to generate a unique slug using slugify
 function generateUniqueSlug(): string {
   // here the base slug string
   const baseString = 'uchiha';
