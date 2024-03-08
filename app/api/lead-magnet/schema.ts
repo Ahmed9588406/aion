@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const leadMagnetCreateRequest = z.object({
+  id: z.string({ required_error: "Name is required" }),
   name: z.string({ required_error: "Name is required" }),
   status: z.string({ required_error: "Status is required" }),
   draftBody: z.string({ required_error: "Draft body is required" }),
