@@ -10,8 +10,9 @@ function LeadMagnetProfilePreview({profile}: LeadMagnetProfileEditorProps) {
   return (
     <div className='mb-10 flex max-h-[85vh] flex-col overflow-y-scroll rounded-lg text-center md:mb-0 md:p-8'>
         {/* Image */}
-        {profile.profileImageUrl && (<Image src={profile.profileImageUrl} alt='Profile Picture' height={300} width={300}
-        className='mx-auto mb-3 drop-shadow-lg'
+        {profile.profileImageUrl && 
+        (<Image src={profile.profileImageUrl} alt='Profile Picture' height={300} width={300}
+        className='mx-auto mb-3 drop-shadow-lg rounded-full'
         draggable={false}
         />
         )}

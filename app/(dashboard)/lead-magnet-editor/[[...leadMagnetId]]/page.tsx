@@ -25,15 +25,34 @@ async function LeadMagnetEditorPage({ params }: LeadMagnetEditorParams) {
     leadMagnet = await createNewLeadMagnet();
   } else {
     // Fetch existing LeadMagnet
-    let leadMagnet = await prismadb.leadMagnet.findUnique({
+    leadMagnet = await prismadb.leadMagnet.findUnique({
       where: {
         id: leadMagnetId,
       },
       select: {
         id: true,
+        userId: true,
+        name: true,
+        status: true,
+        slug: true,
+        publishedTitle: true,
+        draftTitle: true,
+        publishedSubtitle: true,
+        draftSubtitle: true,
+        publishedPrompt: true,
+        draftPrompt: true,
+        publishedBody: true,
+        draftBody: true,
+        publishedFirstQuestion: true,
+        draftFirstQuestion: true,
+        publishedEmailCapture: true,
+        draftEmailCapture: true,
+        createdAt: true,
         updatedAt: true,
-        // Other fields you need for editing
-      }, // Only select necessary fields for performance
+        publishedAt: true,
+        pageViews: true,
+        
+      }, 
     });
   }
 
@@ -46,11 +65,11 @@ async function LeadMagnetEditorPage({ params }: LeadMagnetEditorParams) {
 
 export default LeadMagnetEditorPage;
 
-async function createNewLeadMagnet() {
+async function createNewLeadMagnet(): Promise<LeadMagnet> {
   const newSlug = generateUniqueSlug();
 
   // Create a new LeadMagnet with default values and new slug
-  return await prismadb.leadMagnet.create({
+  const newLeadMagnet = await prismadb.leadMagnet.create({
     data: {
       ...DEFAULT_LEAD_MAGNET,
       id: generateUniqueId(),
@@ -58,6 +77,8 @@ async function createNewLeadMagnet() {
       updatedAt: new Date(), // Include initial updatedAt value
     },
   });
+
+  return newLeadMagnet;
 }
 
 function generateUniqueId(): string {
