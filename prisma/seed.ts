@@ -39,6 +39,12 @@ const seed = async () => {
         leadMagnetId: "123456789",
         userId: "user_2WruMGsskRrt6HDECpRhzNyH1vp",
       },
+      {
+        name: "Dummy User 3",
+        email: "dummy3@gmail.com",
+        leadMagnetId: "107f8260-9b81-4b05-bef2-fccddbd8135f",
+        userId: "user_2dPom4gQiDw2geVR5DuD4LgOAr6",
+      },
     ],
   });
 };

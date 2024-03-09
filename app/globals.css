@@ -257,3 +257,10 @@ body,
 .ProseMirror ol li label {
   margin-right: 3px;
 }
+
+.circle {
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  border: 10px solid #f3e8ff;
+}

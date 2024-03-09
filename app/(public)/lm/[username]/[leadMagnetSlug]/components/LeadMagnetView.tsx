@@ -15,7 +15,7 @@ function LeadMagnetView({leadMagnet, profile}: LeadMagnetViewProps) {
             src={profile.profileImageUrl}
             height={275}
             width={275}
-            className='mx-auto mb-3 drop-shadow-lg rounded-full'
+            className='mx-auto mb-3 drop-shadow-lg rounded-full circle'
             draggable={false}
             priority={false} 
             />
